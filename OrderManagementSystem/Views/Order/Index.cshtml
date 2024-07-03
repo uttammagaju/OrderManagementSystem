@@ -50,21 +50,23 @@
                                         <button class="btn btn-danger btn-sm" data-bind="click:$parent.RemoveItem">
                                             <i class="fa-solid fa-trash-can"></i>Remove
                                         </button>
+                                        <button class="btn btn-success mb-3" data-bind="click:$parent.AddItem">
+                                            <i class="fa-solid fa-plus"></i>Add Item</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-success mb-3" data-bind="click:AddItem"><i class="fa-solid fa-plus"></i>Add Item</button>
+                       
                         <div class="form-group">
                             <label>Total Amount:</label>
-                            <input type="text" class="form-control" readonly>
+                            <input  class="form-control" readonly data-bind="value:totalAmount">
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary">
-                        <span data-bind="click: SaveOrder">Create</span>
+                        <span data-bind="click: SaveOrder,">Create</span>
                         <span data-bind="if: IsUpdated"> Update</span>
                     </button>
                     <button  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -83,15 +85,15 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach:CurrentOrder()">
+        <tbody data-bind="foreach:Orders()">
             <tr>
-                <td data-bind="text:$index() -1"></td>
+                <td data-bind="text:OrderId"></td>
                 <td data-bind="text:Date"></td>
                 <td data-bind="text:CustomerName"></td>
                 <td data-bind="text:TotalAmount"></td>
                 <td>
-                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#orderModal">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#orderModal" data-bind="click: $parent.SelectOrder">Edit</button>
+                    <button class="btn btn-sm btn-danger" data-bind="click: $root.DeleteOrder">Delete</button>
                 </td>
             </tr>
         </tbody>

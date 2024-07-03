@@ -91,6 +91,9 @@ namespace OrderManagementSystem.Services
                     {
                         OrderId = item.OrderId,
                         CustomerName = item.CustomerName,
+                        Address = item.Address,
+                        Date =item.Date.ToString("yyyy-MM-dd"),
+                        TotalAmount = item.TotalAmount,
                     };
                     data.Items = (from d in detail
                                   select new ItemVM()
