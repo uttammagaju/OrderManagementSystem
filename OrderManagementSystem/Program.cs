@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 builder.Services.AddScoped<IOrderServices, OrderServices>();
-builder.Services.AddScoped<IOrderItemsServices, OrderItemsServices>();
+
 
 var app = builder.Build();
 

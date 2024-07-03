@@ -19,6 +19,9 @@ namespace OrderManagementSystem.Services
             {
                 OrderId = 0,
                 CustomerName = model.CustomerName,
+                Address = model.Address,
+               Date = DateTime.Now,
+               TotalAmount = model.TotalAmount
             };
             var masterAdd = _context.Orders.Add(masterData);
             var masterAdd1 = await _context.SaveChangesAsync();

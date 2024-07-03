@@ -9,6 +9,12 @@ namespace OrderManagementSystem.Models
         public int OrderId { get; set; }
         [Required]
         public string CustomerName { get; set; }
-  
+        [Required]
+        public string Address { get; set; }
+        
+        public DateTime Date { get; set; }
+        [Required]
+        public decimal TotalAmount { get; set; }
+
     }
 }
