@@ -7,7 +7,7 @@ namespace OrderManagementSystem.Models.VM
         public int OrderId { get; set; }
         public string CustomerName { get; set; }
         public string Address { get; set; }
-        public string Date {  get; set; }
+        public DateTime Date {  get; set; }
         public decimal TotalAmount { get; set; }
         public List<ItemVM> Items { get; set; }
     }

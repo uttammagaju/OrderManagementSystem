@@ -92,7 +92,7 @@ namespace OrderManagementSystem.Services
                         OrderId = item.OrderId,
                         CustomerName = item.CustomerName,
                         Address = item.Address,
-                        Date =item.Date.ToString("yyyy-MM-dd"),
+                        Date =item.Date,
                         TotalAmount = item.TotalAmount,
                     };
                     data.Items = (from d in detail
@@ -147,6 +147,9 @@ namespace OrderManagementSystem.Services
                 return false;
             }
             masterData.CustomerName = model.CustomerName;
+            masterData.Address = model.Address;
+            masterData.TotalAmount = model.TotalAmount;
+            masterData.Date = model.Date;
             var masterAdd = _context.Orders.Update(masterData);
             await _context.SaveChangesAsync();
 
