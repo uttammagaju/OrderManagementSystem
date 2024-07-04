@@ -20,7 +20,7 @@ namespace OrderManagementSystem.Services
                 OrderId = 0,
                 CustomerName = model.CustomerName,
                 Address = model.Address,
-               Date = DateTime.Now,
+               Date = model.Date,
                TotalAmount = model.TotalAmount
             };
             var masterAdd = _context.Orders.Add(masterData);

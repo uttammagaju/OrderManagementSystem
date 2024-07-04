@@ -46,7 +46,7 @@
                                     <td><input type="text" class="form-control" data-bind="value: ProductName"></td>
                                     <td><input type="number" class="form-control" data-bind="value: Quantity, valueUpdate : 'input' ,event:{change: $root.calculateTotal}"></td>
                                     <td><input type="number" step="0.01" class="form-control" data-bind="value: Price, valueUpdate : 'input' ,event:{change: $root.calculateTotal}" /></td>
-                                     <td><input type="number" step="0.01" class="form-control" data-bind="value:Total, valueUpdate : 'input'"  /></td> 
+                                     <td><input type="number" step="0.01" class="form-control" data-bind="value:Total, valueUpdate : 'input'" readonly /></td> 
                                     <td>
                                         <button class="btn btn-danger btn-sm" data-bind="click: $root.RemoveItem">
                                             <i class="fa-solid fa-trash-can"></i>Remove
@@ -55,9 +55,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-success mb-3" data-bind="click: $root.AddItem"><i class="fa-solid fa-plus"></i>Add Item</button>
+                        <div class="row mb-3">
+                            <div class="col-md-12 text-end">
+                                <button class="btn btn-success" data-bind="click: $root.AddItem">
+                                    <i class="fa-solid fa-plus"></i>Add Item
+                                </button>
+                            </div>
+                        </div>
 
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label>Total Amount:</label>
                             <input type="text" class="form-control" data-bind="value: totalAmount" readonly>
                         </div>
