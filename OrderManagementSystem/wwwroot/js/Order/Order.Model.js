@@ -21,4 +21,9 @@ var ItemVM = function (item) {
     self.Quantity = ko.observable(item.quantity || '');
     self.Price = ko.observable(item.price || '');
     self.OrderId = ko.observable(item.orderId || 0);
+    self.Total = ko.computed(function () {
+        var price = parseFloat(self.Price()) || 0;
+        var quantity = parseInt(self.Quantity()) || 0;
+        return (price * quantity).toFixed(2);
+    });
 }

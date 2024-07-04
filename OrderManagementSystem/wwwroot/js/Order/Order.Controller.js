@@ -36,6 +36,7 @@ var OrderController = function () {
                         self.CurrentOrder.push(new OrderItemVM(result));
                         self.resetForm();
                         self.getData();
+                       
                         $('#orderModal').modal('hide');
                     })
                     .fail(function (err) {
@@ -121,7 +122,7 @@ var OrderController = function () {
         return total.toFixed(2);
     });
 
-    
+   
     self.calculateTotal = function () {
         self.totalAmount.notifySubscribers();  // Recalculate the total amount
     };
