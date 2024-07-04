@@ -27,7 +27,28 @@ var OrderController = function () {
     self.AddOrder = function () {
         var orderData = ko.toJS(self.IsUpdated() ? self.SelectedOrder : self.NewOrder);
         orderData.TotalAmount = self.totalAmount();
+        // Format the data correctly
+        var formattedOrder = {
+            orderId: orderData.OrderId || 0,
+            customerName: orderData.CustomerName,
+            address: orderData.Address,
+            date: orderData.Date,
+            totalAmount: parseFloat(self.totalAmount()),
+            items: orderData.Items.map(item => ({
+                orderItemId: item.OrderItemId || 0,
+                productName: item.ProductName,
+                quantity: parseInt(item.Quantity) || 0,
+                price: parseFloat(item.Price) || 0,
+                orderId: item.OrderId || 0
+            }))
+        };
 
+        // Validate the order data
+        var validation = self.validateOrder(formattedOrder);
+        if (!validation.isValid) {
+            alert(validation.errorMessage);
+            return;
+        }
         switch (self.mode()) {
             case 1:
                 ajax.post(baseUrl, JSON.stringify(orderData))
@@ -62,6 +83,44 @@ var OrderController = function () {
                     });
                 break;
         }
+    };
+
+
+    self.validateOrder = function (orderData) {
+        var isValid = true;
+        var errorMessage = "";
+
+        if (!orderData.customerName) {
+            isValid = false;
+            errorMessage += "Customer Name is required. ";
+        }
+
+        if (!orderData.date) {
+            isValid = false;
+            errorMessage += "Date is required. ";
+        }
+
+        if (orderData.items.length === 0) {
+            isValid = false;
+            errorMessage += "At least one item is required. ";
+        }
+
+        orderData.items.forEach((item, index) => {
+            if (!item.productName) {
+                isValid = false;
+                errorMessage += `Product Name is required for item ${index + 1}. `;
+            }
+            if (!item.quantity || item.quantity <= 0) {
+                isValid = false;
+                errorMessage += `Valid Quantity is required for item ${index + 1}. `;
+            }
+            if (!item.price || item.price <= 0) {
+                isValid = false;
+                errorMessage += `Valid Price is required for item ${index + 1}. `;
+            }
+        });
+
+        return { isValid, errorMessage };
     };
 
     // Delete Product
